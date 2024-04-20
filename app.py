@@ -373,18 +373,18 @@ def execute_tasks():
             app_dev_crew = Crew(api_key=openai_api_key, agents=agents, tasks=tasks,verbose=True, process=Process.sequential,share_crew=True,full_output=True)
             python_code = generate_python_code(agents, tasks)
             for task in tasks:
-                # # Redirecting stdout to capture terminal output
-                # captured_output = StringIO()
-                # sys.stdout = captured_output
+                # Redirecting stdout to capture terminal output
+                captured_output = StringIO()
+                sys.stdout = captured_output
 
-                # # Execute task
+                # Execute task
                 result = app_dev_crew.kickoff()
 
-                # # Resetting stdout to original value
-                # sys.stdout = sys.__stdout__
+                # Resetting stdout to original value
+                sys.stdout = sys.__stdout__
 
-                # # Appending captured output to terminal_output
-                # terminal_output += captured_output.getvalue() + "\n"
+                # Appending captured output to terminal_output
+                terminal_output += captured_output.getvalue() + "\n"
 
                 # Store result for this task
                 task_results.append(result)
